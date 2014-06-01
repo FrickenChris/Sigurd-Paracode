@@ -305,3 +305,5 @@ var/score_dmgestkey = null
 
 // Recall time limit:  2 hours
 var/recall_time_limit=72000
+
+var/count = 0

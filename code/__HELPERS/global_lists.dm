@@ -21,10 +21,11 @@ var/global/list/surgery_steps = list()				//list of all surgery steps  |BS12
 var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
 var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mobs target tracking.
 var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
-
+var/global/list/flag_list = list()					//list of flags during Nations gamemode
 //Languages/species/whitelist.
 var/global/list/all_species[0]
 var/global/list/all_languages[0]
+var/global/list/all_nations[0]
 var/global/list/whitelisted_species = list()
 
 // Posters
@@ -51,7 +52,7 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 /////Initial Building/////
 //////////////////////////
 
-/proc/make_datum_references_lists()
+/hook/startup/proc/makeDatumRefLists()
 	var/list/paths
 
 	//Hair - Initialise all /datum/sprite_accessory/hair into an list indexed by hair-style name
@@ -97,6 +98,11 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 		var/datum/job/J = new T
 		joblist[J.title] = J
 
+	paths = typesof(/datum/nations)-/datum/nations
+	for(var/T in paths)
+		var/datum/nations/N = new T
+		all_nations[N.name] = N
+
 	//Languages and species.
 	paths = typesof(/datum/language)-/datum/language
 	for(var/T in paths)
@@ -113,6 +119,8 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 
 		if(S.flags & IS_WHITELISTED)
 			whitelisted_species += S.name
+
+	return 1
 
 /* // Uncomment to debug chemical reaction list.
 /client/verb/debug_chemical_list()

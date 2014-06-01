@@ -102,10 +102,7 @@
 		modtype = "Security"
 	else if(istype(src,/mob/living/silicon/robot/drone))
 		laws = new /datum/ai_laws/drone()
-		connected_ai = select_active_ai_with_fewest_borgs()
-		if(connected_ai)
-			connected_ai.connected_robots += src
-			lawsync()
+		connected_ai = null
 	else
 		if(mmi.alien || alien)
 			laws = new /datum/ai_laws/alienmov()

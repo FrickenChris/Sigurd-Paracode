@@ -724,7 +724,7 @@ var/list/slot_equipment_priority = list( \
 	set name = "Show Server Version"
 	set category = "OOC"
 	set desc = "Shows you the version of code the server is running on. Identifiable by date."
-	usr << "Server Version #220514"
+	usr << "Server Version #010614"
 
 
 /mob/Topic(href, href_list)
@@ -808,6 +808,17 @@ var/list/slot_equipment_priority = list( \
 
 /mob/proc/is_active()
 	return (0 >= usr.stat)
+
+/mob/proc/is_mechanical()
+	if(mind && (mind.assigned_role == "Cyborg" || mind.assigned_role == "AI"))
+		return 1
+	return istype(src, /mob/living/silicon) || get_species() == "Machine"
+
+/mob/proc/is_ready()
+	return !!client
+
+/mob/proc/get_gender()
+	return gender
 
 /mob/proc/see(message)
 	if(!is_active())

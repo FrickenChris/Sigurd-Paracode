@@ -12,6 +12,9 @@
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
 	minimal_player_age = 14
+	required_objectives=list(
+		/datum/job_objective/save_crew
+	)
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		H.equip_or_collect(new /obj/item/device/radio/headset/heads/captain(H), slot_l_ear)
@@ -35,6 +38,8 @@
 		L.imp_in = H
 		L.implanted = 1
 		world << "<b>[H.real_name] is the captain!</b>"
+		H << "\red<b>As the Captain, it is your job to make sure all your crew, dead or alive, make it off the station.</b>"
+		H << "\red<b>You can get a reminder of this objective by viewing your notes.</b>"
 		var/datum/organ/external/affected = H.organs_by_name["head"]
 		affected.implants += L
 		L.part = affected
@@ -57,6 +62,9 @@
 	idtype = /obj/item/weapon/card/id/silver
 	req_admin_notify = 1
 	minimal_player_age = 10
+	required_objectives=list(
+		/datum/job_objective/save_crew
+	)
 	access = list(access_security, access_sec_doors, access_brig, access_court, access_forensics_lockers,
 			            access_medical, access_engine, access_change_ids, access_ai_upload, access_eva, access_heads,
 			            access_all_personal_lockers, access_maint_tunnels, access_bar, access_janitor, access_construction, access_morgue,
@@ -92,6 +100,8 @@
 		var/datum/organ/external/affected = H.organs_by_name["head"]
 		affected.implants += L
 		L.part = affected
+		H << "\red<b>As the Head of Personnel, it is your job to make sure all the crew, dead or alive, make it off the station.</b>"
+		H << "\red<b>You can get a reminder of this objective by viewing your notes.</b>"
 		return 1
 
 
@@ -148,7 +158,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "Whichever head your protect, and ultimately the Captain"
+	supervisors = "Whichever Head needs your protection, and ultimately the Captain"
 	selection_color = "#ccccff"
 	idtype = /obj/item/weapon/card/id/centcom
 	req_admin_notify = 1

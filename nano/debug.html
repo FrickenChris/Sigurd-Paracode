@@ -1,0 +1,31 @@
+
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<head>
+		<script type='text/javascript'>
+			function receiveUpdateData(jsonString)
+			{
+				// We need both jQuery and NanoUpdate to be able to recieve data
+				// At the moment any data received before those libraries are loaded will be lost
+				if (typeof NanoUpdate != 'undefined' && typeof jQuery != 'undefined')
+				{
+					NanoUpdate.receiveUpdateData(jsonString);
+				}
+			}
+		</script>
+		<script type='text/javascript' src='libraries.min.js'></script> <script type='text/javascript' src='nano_config.js'></script> <script type='text/javascript' src='nano_update.js'></script> <script type='text/javascript' src='nano_base_helpers.js'></script> <link rel='stylesheet' type='text/css' href='shared.css'> <link rel='stylesheet' type='text/css' href='icons.css'> 
+	</head>
+	<body scroll=auto data-url-parameters='{"src":"[0x2100497d]"}' data-template-data='{"main":"comm_console.tmpl"}' data-initial-data='{"is_ai":0,"menu_state":1,"emagged":0,"authenticated":0,"screen":1,"stat_display":{"type":"blank","line_1":"-----","line_2":"-----","presets":[{"name":"blank","label":"Clear","desc":"Blank slate"},{"name":"shuttle","label":"Shuttle ETA","desc":"Display how much time is left."},{"name":"message","label":"Message","desc":"A custom message."}],"alerts":[{"alert":"default","label":"NanoTrasen","desc":"Oh god."},{"alert":"redalert","label":"Red Alert","desc":"Nothing to do with communists."},{"alert":"lockdown","label":"Lockdown","desc":"Let everyone know they`re on lockdown."},{"alert":"biohazard","label":"Biohazard","desc":"Great for virus outbreaks and parties."}]},"security_level":0,"str_security_level":"green","levels":[{"id":0,"name":"Green"},{"id":1,"name":"Blue"}],"messages":[],"current_message":0,"shuttle":{"on":0,"pos":0,"can_recall":1},"ui":{"status":2,"user":{"name":"Arabella Fiddler"}}}'>
+		<div id='uiWrapper'>
+			<div id='uiTitleWrapper'><div id='uiStatusIcon' class='icon24 uiStatusGood'></div><div id='uiTitle'>Communications Console</div><div id='uiTitleFluff'></div></div>
+			<div id='uiContent'>
+				<noscript><div id='uiNoJavaScript'>Your browser does not have JavaScript enabled. Please enable JavaScript, then restart SS13.</div></noscript>
+	
+	<div id='mainTemplate'></div>
+	
+			</div>
+		</div>
+	</body>
+</html>
+	
