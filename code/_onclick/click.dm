@@ -36,7 +36,7 @@
 /mob/proc/ClickOn( var/atom/A, var/params )
 	if(world.time <= next_click)
 		return
-	next_click = world.time + 1
+	next_click = world.time + 0
 
 	if(client.buildmode)
 		build_click(src, client.buildmode, params, A)
@@ -97,14 +97,14 @@
 
 		// faster access to objects already on you
 		if(A in contents)
-			next_move = world.time + 6 // on your person
+			next_move = world.time + 0 // on your person
 		else
-			next_move = world.time + 8 // in a box/bag or in your square
+			next_move = world.time + 0 // in a box/bag or in your square
 
 		// No adjacency needed
 		if(W)
 			if(W.flags&USEDELAY)
-				next_move += 5
+				next_move += 0
 
 			var/resolved = A.attackby(W,src)
 			if(!resolved && A && W)
@@ -118,12 +118,12 @@
 
 	// Allows you to click on a box's contents, if that box is on the ground, but no deeper than that
 	if(isturf(A) || isturf(A.loc) || (A.loc && isturf(A.loc.loc)))
-		next_move = world.time + 10
+		next_move = world.time + 0
 
 		if(A.Adjacent(src)) // see adjacent.dm
 			if(W)
 				if(W.flags&USEDELAY)
-					next_move += 5
+					next_move += 0
 
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
 				var/resolved = A.attackby(W,src)
