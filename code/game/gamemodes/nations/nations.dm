@@ -62,77 +62,77 @@ datum/game_mode/nations
 		if(H.mind)
 			if(H.mind.assigned_role in engineering_positions)
 				H.mind.nation = all_nations["Atmosia"]
-				H.hud_updateflag |= 1 << SPECIALROLE_HUD
+				H.hud_updateflag |= 1 << NATIONS_HUD
 				var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudatmosia")
 				H.client.images += I
 				H.verbs += /mob/proc/respawn_self
-//				H.verbs += /mob/proc/nations_status
+				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
 				H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role in medical_positions)
 				H.mind.nation = all_nations["Medistan"]
-				H.hud_updateflag |= 1 << SPECIALROLE_HUD
+				H.hud_updateflag |= 1 << NATIONS_HUD
 				var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudmedistan")
 				H.client.images += I
 				H.verbs += /mob/proc/respawn_self
-//				H.verbs += /mob/proc/nations_status
+				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
 				H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role in science_positions)
 				H.mind.nation = all_nations["Scientopia"]
-				H.hud_updateflag |= 1 << SPECIALROLE_HUD
+				H.hud_updateflag |= 1 << NATIONS_HUD
 				var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudscientopia")
 				H.client.images += I
 				H.verbs += /mob/proc/respawn_self
-//				H.verbs += /mob/proc/nations_status
+				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
 				H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role in security_positions)
 				H.mind.nation = all_nations["Brigston"]
-				H.hud_updateflag |= 1 << SPECIALROLE_HUD
+				H.hud_updateflag |= 1 << NATIONS_HUD
 				var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudbrigston")
 				H.client.images += I
 				H.verbs += /mob/proc/respawn_self
-//				H.verbs += /mob/proc/nations_status
+				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
 				H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role in cargonians)
 				H.mind.nation = all_nations["Cargonia"]
-				H.hud_updateflag |= 1 << SPECIALROLE_HUD
+				H.hud_updateflag |= 1 << NATIONS_HUD
 				var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudcargonia")
 				H.client.images += I
 				H.verbs += /mob/proc/respawn_self
-//				H.verbs += /mob/proc/nations_status
+				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
 				H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role in civilian_positions)
 				H.mind.nation = all_nations["People's Republic of Commandzakstan"]
-				H.hud_updateflag |= 1 << SPECIALROLE_HUD
+				H.hud_updateflag |= 1 << NATIONS_HUD
 				var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudcommand")
 				H.client.images += I
 				H.verbs += /mob/proc/respawn_self
-//				H.verbs += /mob/proc/nations_status
+				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
 				H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role in command_positions)
 				H.mind.nation = all_nations["People's Republic of Commandzakstan"]
-				H.hud_updateflag |= 1 << SPECIALROLE_HUD
+				H.hud_updateflag |= 1 << NATIONS_HUD
 				var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudcommand")
 				H.client.images += I
 				H.verbs += /mob/proc/respawn_self
-//				H.verbs += /mob/proc/nations_status
+				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
 				H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
@@ -180,13 +180,13 @@ datum/game_mode/nations
 
 
 
-/mob/living/carbon/human/proc/nations_status()
+/mob/proc/nations_status()
 	set category = "OOC"
 	set name = "Nation Status"
 	set desc = "Information on your nation and your allies."
 
-	var/datum/game_mode/nations/mode = get_nations_mode()
-	if (!mode) return
+	if (!( ticker )) return
+	if (ticker.mode.name != "nations") return
 	if(!mind) return
 	if(!mind.nation) return
 
@@ -204,6 +204,7 @@ datum/game_mode/nations
 		dat += "the commands of ANY of their members.<br>"
 	else
 		dat += "You are not currently vassalized by anyone! Protect your flag!<br>"
+	dat += "</table>"
 
 	dat += "<br><table cellspacing=5><tr><td><B>Vassals</B></td><td></td></tr>"
 	if(F.vassals.len)
@@ -211,7 +212,17 @@ datum/game_mode/nations
 			dat += "[V.name] is your vassal and must obey the commands of ANY of your members."
 	else
 		dat += "You do not currently have any vassals! Capture flags to vassalize!<br>"
+	dat += "</table>"
+	dat += "<br><table cellspacing=5><tr><td><B>Geneva Space Convention</B></td><td></td></tr>"
+	dat += "The following are considered OUTLAWED by the Geneva Space Convention and will result"
+	dat += "in severe consequences if used in warfare:<br>"
+	dat += "<B>Scientopia - Large Scale Bombs - Nuclear Warfare"
+	dat += "Atmosia - Using atmos as a weapon - Chemical Warfare"
+	dat += "Medistan - Releasing harmful viruses - Biological Warfare</B>"
+	dat += "</table>"
 
+	dat += "</body></html>"
+	usr << browse(dat, "window=nationstatus;size=400x500")
 
 /mob/proc/respawn_self()
 	set category = "OOC"
@@ -318,7 +329,7 @@ datum/game_mode/nations
 				data_core.manifest_inject(new_character)
 
 			new_character << "You have been fully respawned. Get back in the fight!."
-			new_character.hud_updateflag |= 1 << SPECIALROLE_HUD
+			new_character.hud_updateflag |= 1 << NATIONS_HUD
 			return new_character
 
 
@@ -338,84 +349,86 @@ datum/game_mode/nations
 	if(H.mind)
 		if(H.mind.assigned_role in engineering_positions)
 			H.mind.nation = all_nations["Atmosia"]
-			H.hud_updateflag |= 1 << SPECIALROLE_HUD
+			H.hud_updateflag |= 1 << NATIONS_HUD
 			var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudatmosia")
 			H.client.images += I
 			H.verbs += /mob/proc/respawn_self
-//			H.verbs += /mob/proc/nations_status
+			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
 			H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
-			return
+			return 1
 		else if(H.mind.assigned_role in medical_positions)
 			H.mind.nation = all_nations["Medistan"]
-			H.hud_updateflag |= 1 << SPECIALROLE_HUD
+			H.hud_updateflag |= 1 << NATIONS_HUD
 			var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudmedistan")
 			H.client.images += I
 			H.verbs += /mob/proc/respawn_self
-//			H.verbs += /mob/proc/nations_status
+			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
 			H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
-			return
+			return 1
 		else if(H.mind.assigned_role in science_positions)
 			H.mind.nation = all_nations["Scientopia"]
-			H.hud_updateflag |= 1 << SPECIALROLE_HUD
+			H.hud_updateflag |= 1 << NATIONS_HUD
 			var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudscientopia")
 			H.client.images += I
 			H.verbs += /mob/proc/respawn_self
-//			H.verbs += /mob/proc/nations_status
+			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
 			H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
-			return
+			return 1
 		else if(H.mind.assigned_role in security_positions)
 			H.mind.nation = all_nations["Brigston"]
-			H.hud_updateflag |= 1 << SPECIALROLE_HUD
+			H.hud_updateflag |= 1 << NATIONS_HUD
 			var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudbrigston")
 			H.client.images += I
 			H.verbs += /mob/proc/respawn_self
-//			H.verbs += /mob/proc/nations_status
+			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
 			H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
-			return
+			return 1
 		else if(H.mind.assigned_role in cargonians)
 			H.mind.nation = all_nations["Cargonia"]
-			H.hud_updateflag |= 1 << SPECIALROLE_HUD
+			H.hud_updateflag |= 1 << NATIONS_HUD
 			var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudcargonia")
 			H.client.images += I
 			H.verbs += /mob/proc/respawn_self
-//			H.verbs += /mob/proc/nations_status
+			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
 			H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
-			return
+			return 1
 		else if(H.mind.assigned_role in civilian_positions)
 			H.mind.nation = all_nations["People's Republic of Commandzakstan"]
-			H.hud_updateflag |= 1 << SPECIALROLE_HUD
+			H.hud_updateflag |= 1 << NATIONS_HUD
 			var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudcommand")
 			H.client.images += I
 			H.verbs += /mob/proc/respawn_self
-//			H.verbs += /mob/proc/nations_status
+			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
 			H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
-			return
+			return 1
 		else if(H.mind.assigned_role in command_positions)
 			H.mind.nation = all_nations["People's Republic of Commandzakstan"]
-			H.hud_updateflag |= 1 << SPECIALROLE_HUD
+			H.hud_updateflag |= 1 << NATIONS_HUD
 			var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudcommand")
 			H.client.images += I
 			H.verbs += /mob/proc/respawn_self
-//			H.verbs += /mob/proc/nations_status
+			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
 			H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
-			return
+			return 1
 		else
 			message_admins("[H.name] with [H.mind.assigned_role] could not find any nation to assign!")
 			return 1
+	message_admins("[H.name] latejoined with no mind.")
+	return 1
 
 /proc/get_nations_mode()
 	if(!ticker || !istype(ticker.mode, /datum/game_mode/nations))
