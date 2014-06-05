@@ -18,6 +18,10 @@
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_customs)
 	minimal_player_age = 14
+	required_objectives=list(
+		/datum/job_objective/traitor_capture,
+		/datum/job_objective/prison_break
+	)
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -61,6 +65,10 @@
 	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_morgue)
 	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels)
 	minimal_player_age = 7
+	required_objectives=list(
+		/datum/job_objective/traitor_capture,
+		/datum/job_objective/prison_break
+	)
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -101,6 +109,9 @@
 	minimal_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
 	alt_titles = list("Forensic Technician")
 	minimal_player_age = 7
+	required_objectives=list(
+		/datum/job_objective/traitor_capture
+	)
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		H.equip_or_collect(new /obj/item/device/radio/headset/headset_sec(H), slot_l_ear)
@@ -154,6 +165,9 @@
 	access = list(access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_morgue)
 	minimal_access = list(access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels)
 	minimal_player_age = 7
+	required_objectives=list(
+		/datum/job_objective/traitor_capture
+	)
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		H.equip_or_collect(new /obj/item/device/radio/headset/headset_sec(H), slot_l_ear)
@@ -187,6 +201,9 @@
 	access = list(access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_morgue, access_customs)
 	minimal_access = list(access_security, access_customs, access_maint_tunnels)
 	minimal_player_age = 7
+	required_objectives=list(
+		/datum/job_objective/traitor_capture
+	)
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		H.equip_or_collect(new /obj/item/device/radio/headset/headset_sec(H), slot_l_ear)

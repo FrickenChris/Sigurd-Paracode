@@ -66,4 +66,23 @@
 	
 /datum/job_objective/no_dead/check_for_completion()
 		return 0
+		
+		
+/datum/job_objective/traitor_capture
+	completion_payment=1000
+
+/datum/job_objective/traitor_capture/get_description()
+	return "Make sure any traitors leave the station in handcuffs. Or in a bodybag."
 	
+/datum/job_objective/traitor_capture/check_for_completion()
+	return 0
+	
+
+/datum/job_objective/prison_break
+	completion_payment=1000
+	
+/datum/job_objective/prison_break/get_description()
+	return "Make sure all prisoners leave the station in handcuffs. Don't let anyone escape."
+
+/datum/job_objective/prison_break/check_for_completion()
+	return 0
